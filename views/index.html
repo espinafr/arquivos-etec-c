@@ -27,7 +27,7 @@
             <li>
                 <a target="_blank" href="/download/{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a>
                 -
-                <a href="{{ url_for('remove_file', filename=filename) }}" class="remove-link">Remover</a>
+                <a href="{{ url_for('remove_file', filename=files[i]) }}" class="remove-link">Remover</a>
             </li>
         {%endfor%}
     </ul>

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from flask import Flask, request, render_template, jsonify, send_file, url_for
+from flask import Flask, request, render_template, jsonify, send_file, url_for, redirect
 import uuid
 
 # Support for gomix's 'front-end' and 'back-end' UI.
@@ -12,10 +12,10 @@ app = Flask(__name__, static_folder='public', template_folder='views')
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-def generate_unique_filename(filename):
-    ext = filename.rsplit('.', 1)[1]
-    unique_filename = "{}.{}".format(uuid.uuid4().hex, ext)
-    return unique_filename
+#def generate_unique_filename(filename):
+#   ext = filename.rsplit('.', 1)[1]
+#    unique_filename = "{}.{}".format(uuid.uuid4().hex, ext)
+#    return unique_filename
 
 @app.route('/', methods=['GET'])
 def index():
@@ -30,10 +30,9 @@ def upload_file():
 
     for file in files:
         if file:
-            unique_filename = generate_unique_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+            #unique_filename = generate_unique_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename) #unique_filename
             file.save(file_path)
-            app.config['FILES'][unique_filename] = file.filename
 
     return "Arquivos enviados com sucesso!"
 
@@ -44,7 +43,7 @@ def download_file(filename):
 
 @app.route('/remove/<filename>')
 def remove_file(filename):
-    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename):
+    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         os.remove(file_path)
     return redirect(url_for('index'))
