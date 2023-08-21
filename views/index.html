@@ -23,7 +23,9 @@
     </form>
     <hr>
     <ul id="fileList">
-        <li>sd</li>
+        {%for i in range(0, qntd)%}
+            <li><a href="..//uploads//{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a></li>
+        {%endfor%}
     </ul>
     <script src="{{ url_for('static', filename='client.js') }}"></script>
 </body>

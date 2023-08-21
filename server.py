@@ -15,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
-    return render_template('index.html', )
+    return render_template('index.html', qntd = len(os.listdir('uploads')) files=os.listdir('uploads'))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
