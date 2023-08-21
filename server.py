@@ -4,6 +4,7 @@
 import os
 from flask import Flask, request, render_template, jsonify, send_file, url_for, redirect
 import uuid
+import shutil
 
 # Support for gomix's 'front-end' and 'back-end' UI.
 app = Flask(__name__, static_folder='public', template_folder='views')
@@ -20,7 +21,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', qntd = len(os.listdir(app.config['UPLOAD_FOLDER'])), files=os.listdir(app.config['UPLOAD_FOLDER']))
+    return render_template('index.html', , qntd = len(os.listdir(app.config['UPLOAD_FOLDER'])), files=os.listdir(app.config['UPLOAD_FOLDER']))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -44,9 +45,11 @@ def download_file(filename):
 
 @app.route('/remove/<filename>', methods=['POST'])
 def remove_file(filename):
-    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        os.remove(file_path)
+    senha = request.form.get('senha')
+    if senha == app.secret:
+      if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+          file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+          os.remove(file_path)
     return redirect(url_for('index'))
   
 if __name__ == '__main__':

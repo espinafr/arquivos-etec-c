@@ -27,7 +27,7 @@
             <li>
                 <a target="_blank" href="/download/{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a>
                 <form method="post" action="{{ url_for('remove_file', filename=files[i]) }}">
-                    <input type="password" name="password" placeholder="Senha">
+                    <input type="password" name="senha" placeholder="Senha" required>
                     <button type="submit">Remover</button>
                 </form>
             </li>
