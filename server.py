@@ -9,6 +9,7 @@ import uuid
 app = Flask(__name__, static_folder='public', template_folder='views')
 
 # Set the app secret key from the secret environment variables
+app.secret = os.environ.get('SENHA')
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -41,7 +42,7 @@ def download_file(filename):
     return send_file(os.path.join(app.config['UPLOAD_FOLDER'], filename), as_attachment=True)
 
 
-@app.route('/remove/<filename>')
+@app.route('/remove/<filename>', methods=['POST'])
 def remove_file(filename):
     if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)

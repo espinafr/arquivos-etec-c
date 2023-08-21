@@ -26,8 +26,10 @@
         {%for i in range(0, qntd)%}
             <li>
                 <a target="_blank" href="/download/{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a>
-                -
-                <a href="{{ url_for('remove_file', filename=files[i]) }}" class="remove-link">Remover</a>
+                <form method="post" action="{{ url_for('remove_file', filename=files[i]) }}">
+                    <input type="password" name="password" placeholder="Senha">
+                    <button type="submit">Remover</button>
+                </form>
             </li>
         {%endfor%}
     </ul>
