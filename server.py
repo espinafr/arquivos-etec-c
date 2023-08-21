@@ -19,7 +19,7 @@ app = Flask(__name__, static_folder='public', template_folder='views')
 
 # Set the app secret key from the secret environment variables.
 app.secret = os.environ.get('SECRET')
-UPLOAD_FOLDER = uploads/
+UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
