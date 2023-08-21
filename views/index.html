@@ -17,10 +17,16 @@
 </head>
 <body>
     <h1>Gerenciador de Arquivos</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="fileInput" id="fileInput" multiple>
-        <button type="submit" id="uploadButton">Enviar Arquivo</button>
-    </form>
+    <div class="forms">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="fileInput" id="fileInput" multiple>
+            <button type="submit" id="uploadButton">Enviar Arquivo</button>
+        </form>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="fileInput" id="fileInput" multiple>
+            <button type="submit" id="uploadButton">Enviar Arquivo</button>
+        </form>
+    </div>
     <hr>
     <ul id="fileList">
         {%for i in range(0, qntd)%}
