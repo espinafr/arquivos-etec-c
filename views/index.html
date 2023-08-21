@@ -17,6 +17,7 @@
 </head>
 <body>
     <h1>Gerenciador de Arquivos</h1>
+    <h3>Espaço disponível: {{ disco }} GiB</h3>
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="fileInput" id="fileInput" multiple>
         <button type="submit" id="uploadButton">Enviar Arquivo</button>
