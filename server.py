@@ -34,7 +34,7 @@ def upload_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename) #unique_filename
             file.save(file_path)
 
-    return "Arquivos enviados com sucesso!"
+    return redirect(url_for('index'))
 
 @app.route('/download/<filename>')
 def download_file(filename):
