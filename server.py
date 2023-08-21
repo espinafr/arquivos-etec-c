@@ -1,15 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#       _                              
-#      | |                             
-#    __| |_ __ ___  __ _ _ __ ___  ___ 
-#   / _` | '__/ _ \/ _` | '_ ` _ \/ __|
-#  | (_| | | |  __/ (_| | | | | | \__ \
-#   \__,_|_|  \___|\__,_|_| |_| |_|___/ .
-#
-# A 'Fog Creek'–inspired demo by Kenneth Reitz™
-
 import os
 from flask import Flask, request, render_template, jsonify
 import test
@@ -24,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', )
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

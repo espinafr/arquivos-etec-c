@@ -35,3 +35,8 @@ button {
     border: none;
     cursor: pointer;
 }
+
+
+hr {
+    margin: 1em 0;
+}
