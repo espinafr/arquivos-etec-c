@@ -4,23 +4,25 @@
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
 
-$(function() {
-  console.log('hello world :o');
-  
-  $.get('/dreams', function(dreams) {
-    dreams.forEach(function(dream) {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-    });
-  });
+const fileInput = document.getElementById("fileInput");
+const uploadButton = document.getElementById("uploadButton");
+const fileList = document.getElementById("fileList");
 
-  $('form').submit(function(event) {
-    event.preventDefault();
-    dream = $('input').val();
-    $.post('/dreams?' + $.param({'dream': dream}), function() {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-      $('input').val('');
-      $('input').focus();
-    });
-  });
-
+uploadButton.addEventListener("click", () => {
+    const files = fileInput.files;
+    
+    for (const file of files) {
+        const listItem = document.createElement("li");
+        listItem.textContent = file.name;
+        
+        const downloadLink = document.createElement("a");
+        downloadLink.textContent = "Download";
+        downloadLink.href = URL.createObjectURL(file);
+        downloadLink.download = file.name;
+        
+        listItem.appendChild(downloadLink);
+        fileList.appendChild(listItem);
+    }
+    
+    fileInput.value = null;
 });
