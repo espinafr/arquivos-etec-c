@@ -8,7 +8,7 @@
 <!-- hbs(handlebars): http://handlebarsjs.com/expressions.html -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,20 +17,18 @@
 </head>
 <body>
     <h1>Gerenciador de Arquivos</h1>
-    <div class="forms">
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="fileInput" id="fileInput" multiple>
-            <button type="submit" id="uploadButton">Enviar Arquivo</button>
-        </form>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="fileInput" id="fileInput" multiple>
-            <button type="submit" id="uploadButton">Enviar Arquivo</button>
-        </form>
-    </div>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="fileInput" id="fileInput" multiple>
+        <button type="submit" id="uploadButton">Enviar Arquivo</button>
+    </form>
     <hr>
     <ul id="fileList">
         {%for i in range(0, qntd)%}
-            <li><a target="_blank" href="/download/{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a></li>
+            <li>
+                <a target="_blank" href="/download/{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a>
+                -
+                <a href="{{ url_for('remove_file', filename=filename) }}" class="remove-link">Remover</a>
+            </li>
         {%endfor%}
     </ul>
     <script src="{{ url_for('static', filename='client.js') }}"></script>
