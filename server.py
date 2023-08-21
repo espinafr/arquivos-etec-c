@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, send_file
 import test
 
 # Support for gomix's 'front-end' and 'back-end' UI.
@@ -13,9 +13,9 @@ app.secret = os.environ.get('SECRET')
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', qntd = len(os.listdir('uploads')) files=os.listdir('uploads'))
+    return render_template('index.html', qntd = len(os.listdir(app.config['UPLOAD_FOLDER'])), files=os.listdir(app.config['UPLOAD_FOLDER']))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
