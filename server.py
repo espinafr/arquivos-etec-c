@@ -3,7 +3,7 @@
 
 import os
 from flask import Flask, request, render_template, jsonify, send_file, url_for
-import test
+import uuid
 
 # Support for gomix's 'front-end' and 'back-end' UI.
 app = Flask(__name__, static_folder='public', template_folder='views')
@@ -11,11 +11,10 @@ app = Flask(__name__, static_folder='public', template_folder='views')
 # Set the app secret key from the secret environment variables
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['FILES'] = {}
 
 def generate_unique_filename(filename):
     ext = filename.rsplit('.', 1)[1]
-    unique_filename = f"{uuid.uuid4().hex}.{ext}"
+    unique_filename = "{}.{}".format(uuid.uuid4().hex, ext)
     return unique_filename
 
 @app.route('/', methods=['GET'])
@@ -45,10 +44,9 @@ def download_file(filename):
 
 @app.route('/remove/<filename>')
 def remove_file(filename):
-    if filename in app.config['FILES']:
+    if os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         os.remove(file_path)
-        del app.config['FILES'][filename]
     return redirect(url_for('index'))
   
 if __name__ == '__main__':
