@@ -4,7 +4,6 @@
 import os
 from flask import Flask, request, render_template, jsonify, send_file, url_for, redirect
 import uuid
-import psutil
 
 # Support for gomix's 'front-end' and 'back-end' UI.
 app = Flask(__name__, static_folder='public', template_folder='views')
@@ -13,7 +12,6 @@ app = Flask(__name__, static_folder='public', template_folder='views')
 app.secret = os.environ.get('SENHA')
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-hdd = psutil.disk_usage('/')
 
 #def generate_unique_filename(filename):
 #   ext = filename.rsplit('.', 1)[1]
@@ -22,7 +20,7 @@ hdd = psutil.disk_usage('/')
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', disco = hdd.free/(1024.0 ** 3), qntd = len(os.listdir(app.config['UPLOAD_FOLDER'])), files=os.listdir(app.config['UPLOAD_FOLDER']))
+    return render_template('index.html', qntd = len(os.listdir(app.config['UPLOAD_FOLDER'])), files=os.listdir(app.config['UPLOAD_FOLDER']))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
