@@ -30,7 +30,7 @@
     <ul id="fileList">
         {% for filename, original_filename in files.items() %}
             <li>
-                <a target="_blank" href="{{ url_for('download', filename=filename) }}" download="{{}}">{{files[i]}}</a>
+                <a target="_blank" href="{{ url_for('download', filename=filename) }}">{{ original_filename }}</a>
                 {% if username %}
                 <form method="post" action="{{ url_for('remove_file', filename=filename) }}">
                     <button type="submit">Remover</button>
