@@ -21,7 +21,7 @@ app.config['USERS'] = {os.environ.get('USER'): os.environ.get('SENHA')}
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', files=os.listdir(app.config['UPLOAD_FOLDER']),)
+    return render_template('index.html', files=os.listdir(app.config['UPLOAD_FOLDER']), username=session.get('username'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
