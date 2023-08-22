@@ -17,19 +17,25 @@
 </head>
 <body>
     <h1>Gerenciador de Arquivos</h1>
+    {% if username %}
+    <p>Logado como: {{ username }} (<a href="{{ url_for('logout') }}">Sair</a>)</p>
+    {% else %}
+    <p><a href="{{ url_for('login') }}">Login</a></p>
+    {% endif %}
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="fileInput" id="fileInput" multiple>
         <button type="submit" id="uploadButton">Enviar Arquivo</button>
     </form>
     <hr>
     <ul id="fileList">
-        {%for i in range(0, qntd)%}
+        {% for filename, original_filename in files.items() %}
             <li>
-                <a target="_blank" href="/download/{{files[i]}}" download="{{files[i]}}">{{files[i]}}</a>
-                <form method="post" action="{{ url_for('remove_file', filename=files[i]) }}">
-                    <input type="password" name="senha" placeholder="Senha" required>
+                <a target="_blank" href="{{ url_for('download', filename=filename) }}" download="{{}}">{{files[i]}}</a>
+                {% if username %}
+                <form method="post" action="{{ url_for('remove_file', filename=filename) }}">
                     <button type="submit">Remover</button>
                 </form>
+                {% endif %}
             </li>
         {%endfor%}
     </ul>
