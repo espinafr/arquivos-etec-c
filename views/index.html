@@ -17,15 +17,20 @@
 </head>
 <body>
     <h1>Gerenciador de Arquivos</h1>
+    <div class="forms">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="fileInput" id="fileInput" multiple>
+            <label for="fileInput">Selecionar Arquivos</label>
+            <button type="submit" id="uploadButton"></button>
+            <label for="uploadButton">Enviar Arquivo</label>
+        </form>
+        <span id="file-chosen">Nenhum arquivo selecionado</span>
+    </div>
     {% if username %}
     <p>Logado como: {{ username }} (<a href="{{ url_for('logout') }}">Sair</a>)</p>
     {% else %}
     <p><a href="{{ url_for('login') }}">Login</a></p>
     {% endif %}
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="fileInput" id="fileInput" multiple>
-        <button type="submit" id="uploadButton">Enviar Arquivo</button>
-    </form>
     <hr>
     <ul id="fileList">
         {% for filename in files %}

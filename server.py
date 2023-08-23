@@ -48,7 +48,7 @@ def upload_file():
     for file in files:
         if file:
             #unique_filename = generate_unique_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename) #unique_filename
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename.replace(" ", "_")) #unique_filename
             file.save(file_path)
 
     return redirect(url_for('index'))

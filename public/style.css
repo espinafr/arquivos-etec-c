@@ -4,19 +4,29 @@
 /* You might want to try something fancier: */
 /* less: http://lesscss.org/ */
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 20px;
 }
 
 h1 {
+    font-family: 'Open Sans', sans-serif;;
+    font-weight: bolder;
+    color: #007bff;
+    text-shadow: 2px 2px black, -1px -1px black, 1px -1px black, -1px 1px black;
     text-align: center;
 }
 
-input[type="file"] {
-    display: block;
+input[type="file"], #uploadButton {
+    display: none;
     margin-bottom: 10px;
+}
+
+#file-chosen {
+    margin-top: 1em;
 }
 
 ul {
@@ -24,21 +34,57 @@ ul {
     padding: 0;
 }
 
-li {
-    margin-bottom: 5px;
-    border: 1px solid black; 
-    padding: .5em; 
-    width: fit-content;
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: .2s;
 }
 
-button {
+a:hover {
+    font-size: 110%;
+    text-decoration: underline;
+}
+
+a::before {
+    content: "→";
+    margin-right: 5px;
+}
+
+li {
+    margin-bottom: 5px;
+    border: 2px solid #007bff; 
+    box-shadow: 1px 1px #007bff;
+    padding: .5em; 
+    max-width: fit-content;
+}
+
+label {
+    font-size: small;
+}
+
+button, .forms label {
+    box-shadow: 2px 2px black, -1px -1px black, 1px -1px black, -1px 1px black;
+    margin: .25em;
     padding: 5px 10px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
+    transition: .2s;
+}
+
+button:hover, .forms label:hover {
+    padding: 10px 15px;
 }
 
 hr {
+    color: #007bff;
     margin: 1em 0;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
