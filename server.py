@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#env\Scripts\python.exe
 # -*- coding: utf-8 -*-
 
 import os
@@ -68,10 +68,10 @@ def upload_file():
 
     for file in files:
         if file:
+            access_db('INSERT INTO files (original_filename, unique_filename, data) VALUES (?, ?, ?)', (file.filename, unique_filename, datetime.now().strftime("%d/%m/%Y às %H:%M")), 'c')
             unique_filename = generate_unique_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
             file.save(file_path)
-            access_db('INSERT INTO files (original_filename, unique_filename, data) VALUES (?, ?, ?)', (file.filename, unique_filename, datetime.now().strftime("%d/%m/%Y às %H:%M")), 'c')
 
     return redirect(url_for('index'))
 
