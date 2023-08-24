@@ -1,22 +1,7 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: http://mozilla.github.io/nunjucks/ -->
-<!-- jade: http://jade-lang.com/ -->
-<!-- haml: http://haml.info/tutorial.html -->
-<!-- hbs(handlebars): http://handlebarsjs.com/expressions.html -->
-
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Arquivos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% extends "base.html" %}
+{% block content %}
 <body>
-    <h1>Gerenciador de Arquivos</h1>
+    <h1>Arquivos Etec C</h1>
     <div class="forms">
         <form action="/upload" method="POST" enctype="multipart/form-data">
             <input type="file" name="fileInput" id="fileInput" multiple>
@@ -33,11 +18,12 @@
     {% endif %}
     <hr>
     <ul id="fileList">
-        {% for filename in files %}
+        {% for file in files %}
             <li>
-                <a target="_blank" href="{{ url_for('download_file', filename=filename) }}">{{ filename }}</a>
+                <p class="timestamp">{{ file[2] }}</p>
+                <a target="_blank" href="{{ url_for('download_file', filename=file[0]) }}">{{ file[1] }}</a>
                 {% if username %}
-                <form method="post" action="{{ url_for('remove_file', filename=filename) }}">
+                <form method="post" action="{{ url_for('remove_file', filename=file[0]) }}">
                     <button type="submit">Remover</button>
                 </form>
                 {% endif %}
@@ -46,4 +32,4 @@
     </ul>
     <script src="{{ url_for('static', filename='client.js') }}"></script>
 </body>
-</html>
+{% endblock %}

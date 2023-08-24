@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Arquivos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-            align-items: center;
-        }
-    </style>
-</head>
+{% extends "base.html" %}
+{% block additional_styles %}
+<style>
+    form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+</style>
+{% endblock %}
+{% block content %}
 <body>
     <h1>Login</h1>
     <form method="post" action="">
@@ -29,4 +25,4 @@
     </form>
     <a href="{{ url_for('index') }}">Voltar</a>
 </body>
-</html>
+{% endblock %}

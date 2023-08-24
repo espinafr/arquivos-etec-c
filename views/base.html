@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivos Etec C</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta property='og:title' content='ARQUIVOS ETEC C'>
+    <meta name='twitter:title' content='ARQUIVOS ETEC C'>
+    <meta name='description' content='Site para compartilhamento simples e rápido de arquivos'>
+    <meta property='og:description' content='Site para compartilhamento simples e rápido de arquivos'>
+    <meta name='twitter:description' content='Site para compartilhamento simples e rápido de arquivos'>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='cropped-logo.png') }}" type="image/x-icon">
+    {% block additional_styles %}{% endblock %}
+</head>
+{% block content %}{% endblock %}
+</html>
